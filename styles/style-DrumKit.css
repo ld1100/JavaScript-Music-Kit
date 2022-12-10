@@ -1,0 +1,61 @@
+html {
+    font-size: 10px;
+    background: url('../bg03.jpg') bottom center;
+    background-size: cover;
+
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.key-box {
+    height: 100vh;
+    padding-top: 15%;
+}
+.key-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.key {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    border: 1px solid rgba(238, 234, 230, 0.5);
+    background-color: rgba(253, 253, 253, 0.4);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    margin: 0 20px;
+    padding: 20px 10px;
+    text-align: center;
+    transition: all .15s ease;
+    cursor: pointer;
+}
+
+kbd {
+    font-size: 50px;
+    font-weight: 500;
+    display: block;
+    cursor: pointer;
+    color: #3c0cb6;
+}
+
+.sound {
+    font-size: 18px;
+    color: #363030;
+    cursor: pointer;
+}
+
+.playing {
+    transform: scale(1.2);
+    border-color: #a24bf1;
+    background-color: rgba(124, 55, 189, 0.2);
+    box-shadow: 0 0 10px #7c37bd;
+}

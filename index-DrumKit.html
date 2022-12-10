@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drum Kit</title>
+  <link rel="icon" href="music.png">
+  <link rel="stylesheet" href="styles/style-DrumKit.css">
+</head>
+<body>
+<div class="key-box">
+  <div class="key-row">
+    <div data-key="97" class="key">
+      <kbd>1</kbd>
+      <span class="sound">do</span>
+    </div>
+    <div data-key="98" class="key">
+      <kbd>2</kbd>
+      <span class="sound">re</span>
+    </div>
+    <div data-key="99" class="key">
+      <kbd>3</kbd>
+      <span class="sound">mi</span>
+    </div>
+    <div data-key="100" class="key">
+      <kbd>4</kbd>
+      <span class="sound">fa</span>
+    </div>
+    <div data-key="101" class="key">
+      <kbd>5</kbd>
+      <span class="sound">sol</span>
+    </div>
+    <div data-key="102" class="key">
+      <kbd>6</kbd>
+      <span class="sound">la</span>
+    </div>
+    <div data-key="103" class="key">
+      <kbd>7</kbd>
+      <span class="sound">si</span>
+    </div>
+  </div>
+  <br/><br/><hr/><br/><br/>
+  <div class="key-row">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+</div>
+<audio data-key="97" src="sounds/musical_scale/基本音阶1_do.mp3"></audio>
+<audio data-key="98" src="sounds/musical_scale/基本音阶2_re.mp3"></audio>
+<audio data-key="99" src="sounds/musical_scale/基本音阶3_mi.mp3"></audio>
+<audio data-key="100" src="sounds/musical_scale/基本音阶4_fa.mp3"></audio>
+<audio data-key="101" src="sounds/musical_scale/基本音阶5_sol.mp3"></audio>
+<audio data-key="102" src="sounds/musical_scale/基本音阶6_la.mp3"></audio>
+<audio data-key="103" src="sounds/musical_scale/基本音阶7_si.mp3"></audio>
+
+
+<audio data-key="65" src="sounds/drum/clap.wav"></audio>
+<audio data-key="83" src="sounds/drum/hihat.wav"></audio>
+<audio data-key="68" src="sounds/drum/kick.wav"></audio>
+<audio data-key="70" src="sounds/drum/openhat.wav"></audio>
+<audio data-key="71" src="sounds/drum/boom.wav"></audio>
+<audio data-key="72" src="sounds/drum/ride.wav"></audio>
+<audio data-key="74" src="sounds/drum/snare.wav"></audio>
+<audio data-key="75" src="sounds/drum/tom.wav"></audio>
+<audio data-key="76" src="sounds/drum/tink.wav"></audio>
+
+<script>
+  function playSound(e) {
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`)
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+    if (!audio) return
+    key.classList.add('playing')
+    audio.currentTime = 0
+    audio.play()
+  }
+
+  // 鼠标点击
+  function playSoundByClick(e) {
+    const key = e.target.nodeName === 'DIV' ? e.target : e.target.parentElement
+    const keyCode = key.getAttribute('data-key')
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`)
+    if (!audio) return
+    key.classList.add('playing')
+    audio.currentTime = 0
+    audio.play()
+  }
+
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return
+    e.target.classList.remove('playing')
+  }
+
+  window.addEventListener('keydown', playSound)
+  const keys = Array.from(document.getElementsByClassName('key'))
+  keys.forEach(item => {
+    item.addEventListener('click', playSoundByClick, true)
+  })
+  keys.forEach(item => {
+    item.addEventListener('transitionend', removeTransition)
+  })
+</script>
+
+</body>
+</html>
